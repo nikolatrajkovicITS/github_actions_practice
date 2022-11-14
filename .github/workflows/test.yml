@@ -1,18 +1,18 @@
 name: Test Workflow
 on: push
-  jobs:
-    test:
-      runs-on: ubuntu-latest
-      steps: 
-        - name: Download code from repo
-          uses: actions/checkout@v3
-        - name: Install NodeJS
-          uses: actions/setup-node@v3
-          with: 
-            node-version: 18
-        - name: Install dependencies
-          # install dependencies from package-lock versions
-          run: npm ci
-        - name: Run tests
-          run: npm test
-        
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Download code from repo
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with: 
+          node-version: 18
+      - name: Install dependencies
+        # install dependencies from package-lock versions
+        run: npm ci
+      - name: Run tests
+        run: npm test
+
