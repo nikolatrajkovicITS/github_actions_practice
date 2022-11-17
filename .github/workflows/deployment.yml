@@ -1,24 +1,13 @@
 name: Deploy Workflow
 on:
-  pull_request:
-    types: 
-      - opened
-      - edited
-     branches: 
-      - main
-      - 'dev-*'  # dev-new  dev-this-is-new
-      - 'feat/**' # feat/new feat/new/button
-  workflow_dispatch:
-  push: 
+  push:
     branches: 
       - main
-      - 'dev-*'  # dev-new  dev-this-is-new
-      - 'feat/**' # feat/new feat/new/button
 jobs: 
   test:
     runs-on: ubuntu-latest
     steps: 
-      - name: Download code from repo
+      - name: Download code
         uses: actions/checkout@v3
       - name: Install NodeJS
         uses: actions/setup-node@v3
@@ -29,11 +18,11 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm test
-  deploy: 
+  build: 
     needs: test
     runs-on: ubuntu-latest
     steps: 
-      - name: Download code from repo
+      - name: Download code
         uses: actions/checkout@v3
       - name: Install NodeJS
         uses: actions/setup-node@v3
@@ -43,5 +32,9 @@ jobs:
         run: npm ci
       - name: Build project
         run: npm run build
+  deploy: 
+    needs: build
+    runs-on: ubuntu-latest
+    steps: 
       - name: Deploy
         run: echo "Deploying..."
