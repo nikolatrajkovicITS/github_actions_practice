@@ -4,7 +4,16 @@ on:
     types: 
       - opened
       - edited
+     branches: 
+      - main
+      - 'dev-*'  # dev-new  dev-this-is-new
+      - 'feat/**' # feat/new feat/new/button
   workflow_dispatch:
+  push: 
+    branches: 
+      - main
+      - 'dev-*'  # dev-new  dev-this-is-new
+      - 'feat/**' # feat/new feat/new/button
 jobs: 
   test:
     runs-on: ubuntu-latest
