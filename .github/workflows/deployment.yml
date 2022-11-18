@@ -9,6 +9,11 @@ jobs:
     steps: 
       - name: Download code
         uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with: 
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-local.json') }} # this collcets all p-lock file and builds a hash on the comibination of all files
       - name: Install NodeJS
         uses: actions/setup-node@v3
         with: 
@@ -30,6 +35,11 @@ jobs:
         uses: actions/setup-node@v3
         with: 
           node-version: 18
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with: 
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-local.json') }}
       - name: Install dependencies
         run: npm ci
       - name: Build project
