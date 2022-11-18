@@ -22,7 +22,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     outputs: 
-      script-file: ${{ steps.publish.script-file }} # access the steps context value
+      script-file: ${{ steps.publish.outputs.script-file }} # access the steps context 
     steps: 
       - name: Download code
         uses: actions/checkout@v3
